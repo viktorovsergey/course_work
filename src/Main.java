@@ -27,13 +27,19 @@ public class Main {
         System.out.println("_____________________________________________________________");
         printFio();
         System.out.println("_____________________________________________________________");
-        System.out.println("_____________________________________________________________");
         printEmployees();
         System.out.println("_____________________________________________________________");
         indexWage(1.1);
         System.out.println("_____________________________________________________________");
-        System.out.println("_____________________________________________________________");
         printEmployees();
+        System.out.println("_____________________________________________________________");
+        searchDepartmentMin(2);
+        System.out.println("_____________________________________________________________");
+        departmentWage(1);
+        System.out.println("_____________________________________________________________");
+        departmentWageAverage(5);
+        System.out.println("_____________________________________________________________");
+        printEmployeesWithoutDepartment();
     }
 
     static void printEmployees() {
@@ -44,7 +50,7 @@ public class Main {
 
     static double sum() {
         int sum = 0;
-        for (int i = 0; i < employees.length - 1; i++) {
+        for (int i = 0; i < employees.length; i++) {
             sum += employees[i].getWage();
         }
         return sum;
@@ -52,7 +58,7 @@ public class Main {
 
     static Employee minWage() {
         Employee min = employees[0];
-        for (int i = 1; i < employees.length - 1; i++) {
+        for (int i = 1; i < employees.length; i++) {
             if (employees[i].getWage() < min.getWage()) {
                 min = employees[i];
             }
@@ -62,7 +68,7 @@ public class Main {
 
     static Employee maxWage() {
         Employee max = employees[0];
-        for (int i = 1; i < employees.length - 1; i++) {
+        for (int i = 1; i < employees.length; i++) {
             if (employees[i].getWage() > max.getWage()) {
                 max = employees[i];
             }
@@ -77,16 +83,65 @@ public class Main {
 
     static void printFio() {
         System.out.println("Ф.И.О сотрудников ");
-        for (int i = 0; i < employees.length - 1; i++) {
+        for (int i = 0; i < employees.length; i++) {
             System.out.println((i + 1) + ". -  " + employees[i].getFio());
         }
     }
 
-    static void  indexWage(double index) {
-        for (int i = 0; i < employees.length - 1; i++) {
-         employees[i].setWage((employees[i].getWage()*index));
-         }
+    static void indexWage(double index) {
+        for (int i = 0; i < employees.length; i++) {
+            employees[i].setWage((employees[i].getWage() * index));
+        }
 
     }
 
+    /*Метод поиска сотрудника с минимальной зарплатой*/
+    static void searchDepartmentMin(int department) {
+        int maskArray = 0;
+        double departmentMinWege = 0;
+        for (int i = 0; i < employees.length; i++) {
+            maskArray = i;
+            departmentMinWege = employees[maskArray].getWage();
+            if (employees[i].getDepartment() == department) break;
+        }
+        for (int i = maskArray; i < employees.length; i++) {
+            if (employees[i].getWage() < departmentMinWege && employees[i].getDepartment() == department) {
+                departmentMinWege = employees[i].getWage();
+            }
+        }
+        System.out.println("Минимальная зарпалата в департаменте " + department + " равна " + departmentMinWege + " " + employees[maskArray].getFio());
+    }
+
+    static void departmentWage(int department) {
+        double departmentWegeSumm = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getDepartment() == department) {
+                departmentWegeSumm = departmentWegeSumm + employees[i].getWage();
+            }
+        }
+        System.out.println("Сумму затрат на зарплату по отделу департаменте " + department + " равна " + departmentWegeSumm);
+    }
+    static void departmentWageAverage(int department) {
+       int sumPeopleInDepartment=0;
+       double sumWageDepartment=0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i].getDepartment() == department) {
+                sumPeopleInDepartment++;
+                sumWageDepartment=sumWageDepartment+employees[i].getWage();
+            }
+        }
+        if (sumPeopleInDepartment!=0){
+             System.out.println( "Средняя зарпла по отделу " + department + " равна " + sumWageDepartment/sumPeopleInDepartment);
+        } else {
+            System.out.println("Нет такого отдела");
+        }
+    }
+    static void printEmployeesWithoutDepartment() {
+        for (int i = 0; i < employees.length; i++) {
+            System.out.println("Сотрудник id - " + employees[i].getId()+" Ф.И.О. "+ employees[i].getFio()+" зарплата "+ employees[i].getWage());
+        }
+    }
 }
+
+
+
