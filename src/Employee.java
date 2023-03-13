@@ -33,11 +33,12 @@ public class Employee {
         this.department = department;
     }
 
-    public void setWage(int wage) {
+    public void setWage(double wage) {
         this.wage = wage;
     }
 
     public String toString() {
         return "id - " + getId() + ". Ф.И.О - " + getFio() + ". Отдел - " + getDepartment() + ". Заработная плата - " + getWage();
     }
+
 }

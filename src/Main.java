@@ -15,17 +15,25 @@ public class Main {
         System.out.println("_____________________________________________________________");
         printEmployees();
         System.out.println("_____________________________________________________________");
-        System.out.printf("Сумма зарплат = " + "%.2f",sum());
+        System.out.printf("Сумма зарплат = " + "%.2f", sum());
         System.out.println();
         System.out.println("_____________________________________________________________");
         System.out.println("Сотрудник с минимальной зарплатой -  " + minWage());
         System.out.println("_____________________________________________________________");
         System.out.println("Сотрудник с максимальной зарплатой -  " + maxWage());
         System.out.println("_____________________________________________________________");
-        System.out.printf("Средняя зарплата = " + "%.2f",averageWage());
+        System.out.printf("Средняя зарплата = " + "%.2f", averageWage());
         System.out.println();
         System.out.println("_____________________________________________________________");
         printFio();
+        System.out.println("_____________________________________________________________");
+        System.out.println("_____________________________________________________________");
+        printEmployees();
+        System.out.println("_____________________________________________________________");
+        indexWage(1.1);
+        System.out.println("_____________________________________________________________");
+        System.out.println("_____________________________________________________________");
+        printEmployees();
     }
 
     static void printEmployees() {
@@ -66,11 +74,19 @@ public class Main {
         double average = sum() / employees.length;
         return average;
     }
-   static void printFio() {
-       System.out.println( "Ф.И.О сотрудников ");
-       for (int i = 0; i < employees.length-1; i++) {
-            System.out.println((i+1)+ ". -  " + employees[i].getFio());
+
+    static void printFio() {
+        System.out.println("Ф.И.О сотрудников ");
+        for (int i = 0; i < employees.length - 1; i++) {
+            System.out.println((i + 1) + ". -  " + employees[i].getFio());
         }
+    }
+
+    static void  indexWage(double index) {
+        for (int i = 0; i < employees.length - 1; i++) {
+         employees[i].setWage((employees[i].getWage()*index));
+         }
+
     }
 
 }
